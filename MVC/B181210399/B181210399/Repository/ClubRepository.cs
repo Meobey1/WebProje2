@@ -8,10 +8,13 @@ namespace B181210399.Repository
     public class ClubRepository : IClubRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IClubRepository _clubRepository;
+ 
 
-        public ClubRepository(ApplicationDbContext context)
+        public ClubRepository(ApplicationDbContext context, IClubRepository clubRepository)
         {
             _context = context;
+            _clubRepository = clubRepository;
         }
 
         public bool Add(Club club)
@@ -34,7 +37,7 @@ namespace B181210399.Repository
 
         public async Task<Club> GetByIdAsync(int id)
         {
-            return await _context.Clubs.FirstOrDefault(i => i.Id == id);
+            return await _context.Clubs.Include(i => i.Address).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<IEnumerable<Club>> GetClubByCity(string city)
@@ -50,7 +53,8 @@ namespace B181210399.Repository
 
         public bool Update(Club club)
         {
-            throw new NotImplementedException();
+            _context.Update(club);
+            return Save();
         }
     }
 }

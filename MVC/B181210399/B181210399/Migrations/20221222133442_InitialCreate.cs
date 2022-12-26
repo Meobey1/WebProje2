@@ -73,37 +73,6 @@ namespace B181210399.Migrations
                         principalTable: "AppUser",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Races",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddresId = table.Column<int>(type: "int", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    RaceCategory = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Races", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Races_Addresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Addresses",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Races_AppUser_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AppUser",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AppUser_AddressID",
                 table: "AppUser",
@@ -118,16 +87,6 @@ namespace B181210399.Migrations
                 name: "IX_Clubs_AppUserId",
                 table: "Clubs",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Races_AddressID",
-                table: "Races",
-                column: "AddressID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Races_AppUserId",
-                table: "Races",
-                column: "AppUserId");
         }
 
         /// <inheritdoc />
@@ -135,9 +94,6 @@ namespace B181210399.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clubs");
-
-            migrationBuilder.DropTable(
-                name: "Races");
 
             migrationBuilder.DropTable(
                 name: "AppUser");

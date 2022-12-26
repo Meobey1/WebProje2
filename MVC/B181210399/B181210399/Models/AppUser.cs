@@ -10,6 +10,5 @@ namespace B181210399.Models
         public int? Mileage { get; set; }
         public Address? Address {get;set;}
         public ICollection<Club> Clubs { get; set; }
-        public ICollection<Race> Races { get; set; }
     }
 }

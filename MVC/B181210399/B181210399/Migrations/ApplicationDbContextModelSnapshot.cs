@@ -108,48 +108,6 @@ namespace B181210399.Migrations
 
                     b.ToTable("Clubs");
                 });
-
-            modelBuilder.Entity("B181210399.Models.Race", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AddresId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AddressID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RaceCategory")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressID");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Races");
-                });
-
             modelBuilder.Entity("B181210399.Models.AppUser", b =>
                 {
                     b.HasOne("B181210399.Models.Address", "Address")
@@ -175,24 +133,6 @@ namespace B181210399.Migrations
 
                     b.Navigation("AppUser");
                 });
-
-            modelBuilder.Entity("B181210399.Models.Race", b =>
-                {
-                    b.HasOne("B181210399.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("B181210399.Models.AppUser", "AppUser")
-                        .WithMany("Races")
-                        .HasForeignKey("AppUserId");
-
-                    b.Navigation("Address");
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("B181210399.Models.AppUser", b =>
                 {
                     b.Navigation("Clubs");
